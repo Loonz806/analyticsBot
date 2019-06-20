@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "lint": "eslint index.js",
     "pretty": "prettier --write index.js",
     "precommit": "npm run lint && npm run pretty",
     "commitmsg": "validate-commit-msg",
@@ -18,7 +19,6 @@
   "devDependencies": {
     "commitizen": "^3.1.1",
     "cz-conventional-changelog": "^2.1.0",
-    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^5.0.0",
@@ -29,6 +29,7 @@
     "validate-commit-msg": "^2.14.0"
   },
   "dependencies": {
+    "dotenv": "^8.0.0",
     "axios": "^0.19.0",
     "slackbots": "^1.2.0"
   },
