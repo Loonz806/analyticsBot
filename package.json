@@ -4,7 +4,7 @@
   "description": "a bot to remind users to use the request form",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "lint": "eslint index.js",
     "pretty": "prettier --write index.js",
     "precommit": "npm run lint && npm run pretty",
@@ -25,6 +25,7 @@
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^2.4.1",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "validate-commit-msg": "^2.14.0"
   },
