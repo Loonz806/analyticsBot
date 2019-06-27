@@ -1,7 +1,11 @@
 const SlackBots = require("slackbots");
+const { RTMClient } = require("@slack/rtm-api");
 // When you wanna add more API stuffs
 // const axios = require("axios");
 const dotenv = require("dotenv");
+
+const token = process.env.TOKEN;
+const rtm = new RTMClient(token);
 
 dotenv.config();
 
@@ -10,6 +14,9 @@ const bot = new SlackBots({
   name: process.env.NAME,
   disconnect: false
 });
+
+// set the toggle for reducing the annoyance
+let hasSeen = false;
 
 // Start handler
 bot.on("start", () => {
@@ -26,6 +33,8 @@ bot.on("start", () => {
 
 // Common actions
 function runHelp() {
+  // well I guess you need help with the form, toggle it back on
+  hasSeen = false;
   const params = {
     icon_emoji: ":question:"
   };
@@ -47,11 +56,15 @@ function handleMessage(message) {
     message.includes(" dataLayer") ||
     message.includes(" digitalData")
   ) {
-    bot.postMessageToChannel(
-      "thegarage",
-      "Have you tried the request form `http://bit.ly/LuluAnalyticsRequest`",
-      params
-    );
+    if (hasSeen === false) {
+      bot.postMessageToChannel(
+        "thegarage",
+        "Have you tried the request form `http://bit.ly/LuluAnalyticsRequest`",
+        params
+      );
+      // now you have seen the message, I will stop asking
+      hasSeen = true;
+    }
   } else if (message.includes(" help")) {
     runHelp();
   } else if (message.includes(" hello")) {

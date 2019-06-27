@@ -30,8 +30,9 @@
     "validate-commit-msg": "^2.14.0"
   },
   "dependencies": {
-    "dotenv": "^8.0.0",
+    "@slack/rtm-api": "^5.0.1",
     "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
     "slackbots": "^1.2.0"
   },
   "config": {
