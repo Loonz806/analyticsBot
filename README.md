@@ -6,4 +6,8 @@
 
 _a Slack bot to serve the Analytics Team for requests for data_
 
-TODO: hosting bot on AWS or some other server with Node
+### Reminders
+
+For modifications, use your own token from the [Slack API](https://api.slack.com/apps), and modify the #channel found in this repo to something you have to test the bot in... perhaps admin of your own slack instance. The app would also need to be hosted via AWS, DigitalOcean or Raspberry Pi running on Node and initialized via `npm run start`
+
+Feel free to modify or make more extensible or whatnot.

@@ -1,11 +1,11 @@
 const SlackBots = require("slackbots");
-const { RTMClient } = require("@slack/rtm-api");
+// const { RTMClient } = require("@slack/rtm-api");
 // When you wanna add more API stuffs
 // const axios = require("axios");
 const dotenv = require("dotenv");
 
-const token = process.env.TOKEN;
-const rtm = new RTMClient(token);
+// const token = process.env.TOKEN;
+// const rtm = new RTMClient(token);
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ bot.on("start", () => {
   };
 
   bot.postMessageToChannel(
-    "thegarage",
+    process.env.CHANNEL,
     "Greetings human it's me @analyticsbot",
     params
   );
@@ -40,7 +40,7 @@ function runHelp() {
   };
 
   bot.postMessageToChannel(
-    "thegarage",
+    process.env.CHANNEL,
     `Type @analyticsbot with either 'analytics', 'digitalData', or 'dataLayer'`,
     params
   );
@@ -48,17 +48,20 @@ function runHelp() {
 
 // Respond to data
 function handleMessage(message) {
+  // Some fun emoji
   const params = {
     icon_emoji: ":chart_with_upwards_trend:"
   };
+  // parse the message for text
   if (
     message.includes(" analytics") ||
     message.includes(" dataLayer") ||
     message.includes(" digitalData")
   ) {
+    // only message if they haven't seen it before
     if (hasSeen === false) {
       bot.postMessageToChannel(
-        "thegarage",
+        process.env.CHANNEL,
         "Have you tried the request form `http://bit.ly/LuluAnalyticsRequest`",
         params
       );
@@ -69,7 +72,7 @@ function handleMessage(message) {
     runHelp();
   } else if (message.includes(" hello")) {
     bot.postMessageToChannel(
-      "thegarage",
+      process.env.CHANNEL,
       "Greetings data interested human. Have you tried the 'help'?",
       params
     );
