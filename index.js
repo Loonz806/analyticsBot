@@ -1,20 +1,12 @@
 const SlackBots = require("slackbots");
-// const { RTMClient } = require("@slack/rtm-api");
+const { token, channel, request, name } = require("./config");
 // When you wanna add more API stuffs
 // const axios = require("axios");
-const dotenv = require("dotenv");
-
-// const token = process.env.TOKEN;
-// const rtm = new RTMClient(token);
-
-dotenv.config();
-
 const bot = new SlackBots({
-  token: process.env.TOKEN,
-  name: process.env.NAME,
+  token,
+  name,
   disconnect: false
 });
-
 // set the toggle for reducing the annoyance
 let hasSeen = false;
 
@@ -24,11 +16,7 @@ bot.on("start", () => {
     icon_emoji: ":chart_with_upwards_trend:"
   };
 
-  bot.postMessageToChannel(
-    process.env.CHANNEL,
-    "Greetings human it's me @analyticsbot",
-    params
-  );
+  bot.postMessageToChannel(channel, `Greetings human it's me @${name}`, params);
 });
 
 // Common actions
@@ -40,8 +28,8 @@ function runHelp() {
   };
 
   bot.postMessageToChannel(
-    process.env.CHANNEL,
-    `Type @analyticsbot with either 'analytics', 'digitalData', or 'dataLayer'`,
+    channel,
+    `Type @${name}'digitalData', 'analytics', or 'dataLayer'`,
     params
   );
 }
@@ -61,8 +49,8 @@ function handleMessage(message) {
     // only message if they haven't seen it before
     if (hasSeen === false) {
       bot.postMessageToChannel(
-        process.env.CHANNEL,
-        "Have you tried the request form `http://bit.ly/LuluAnalyticsRequest`",
+        channel,
+        `Have you tried the request form ${request}`,
         params
       );
       // now you have seen the message, I will stop asking
@@ -72,7 +60,7 @@ function handleMessage(message) {
     runHelp();
   } else if (message.includes(" hello")) {
     bot.postMessageToChannel(
-      process.env.CHANNEL,
+      channel,
       "Greetings data interested human. Have you tried the 'help'?",
       params
     );
