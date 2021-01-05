@@ -29,7 +29,7 @@
     "@slack/rtm-api": "^5.0.1",
     "axios": "^0.21.1",
     "slackbots": "^1.2.0",
-    "dotenv": "^8.0.0"
+    "dotenv": "^8.2.0"
   },
   "husky": {
     "hooks": {
